@@ -1,91 +1,522 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hamdy Gayar | Portfolio</title>
+  <title>Hamdino Soulitan | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700|Playfair+Display:700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #1f1f1f;
-      color: #fff;
-      margin: 0;
-      padding: 0;
+    :root {
+      --primary-color: #d4a373;
+      --primary-hover: #c8935a;
+      --text-dark: #282828;
+      --text-light: #fff;
+      --bg-light: #fff;
+      --bg-footer: #fffaf0;
+      --heading-color: #8B4513;
     }
-    header {
-      background-color: #111;
-      padding: 40px 20px;
-      text-align: center;
+    body, html { 
+      margin:0; 
+      padding:0; 
+      height:100%; 
+      overflow-x:hidden; 
+      font-family:'Almarai', 'Montserrat', sans-serif; 
+      color: var(--text-light);
+      scroll-behavior: smooth;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      color: #ffd700;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #ccc;
-    }
-    section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    .project {
-      background-color: #2c2c2c;
-      margin-bottom: 20px;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-    .project h2 {
-      margin-top: 0;
-      color: #ffd700;
-    }
-    .project a {
-      color: #61dafb;
-      text-decoration: none;
-    }
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 0.9rem;
-      background-color: #111;
-      color: #888;
-    }
+    .hero { position:relative; height:100vh; width:100%; display:flex; align-items:center; justify-content:center; text-align:center; background:rgba(0,0,0,0.5); }
+    .hero video { position:absolute; top:50%; left:50%; min-width:100%; min-height:100%; width:auto; height:auto; transform:translate(-50%,-50%); z-index:-1; object-fit:cover; }
+    .hero-content { z-index:1; animation: fadeIn 2s ease-in-out; padding: 1rem; }
+    @keyframes fadeIn { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+    .logo { width:120px; height:120px; border-radius:50%; border:3px solid var(--primary-color); margin:0 auto 15px; }
+    h1 { font-family:'Playfair Display',serif; font-size:3rem; margin:10px 0; }
+    p.job { font-size:1.1rem; margin-bottom:10px; }
+    #ai-welcome { font-size: 1.2rem; min-height: 1.5rem; margin-bottom: 20px; }
+    .lang-btn { background:var(--primary-color); color:var(--text-light); padding:8px 15px; border:none; border-radius:5px; cursor:pointer; transition: background-color .3s; }
+    .lang-btn:hover { background: var(--primary-hover); }
+    nav { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:15px; }
+    nav a { color:var(--text-light); text-decoration:none; font-weight:600; transition:color .3s; }
+    nav a:hover { color:var(--primary-color); }
+    section { max-width:900px; margin:40px auto; padding:20px; color:var(--text-dark); background:var(--bg-light); border-radius:10px; scroll-margin-top: 20px;}
+    h2 { color:var(--heading-color); font-size:1.9rem; margin-bottom:20px; border-bottom:2px solid rgba(139,69,19,0.3); padding-bottom:8px; }
+    h3 { font-size: 1.2rem; font-weight: 700; color: var(--heading-color); }
+    .card { background:var(--bg-light); margin-bottom:20px; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); transition: all .3s; }
+    .card:hover { transform:translateY(-5px); box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+    .skills-section ul { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+    .skills-section li { background:#D2B48C; color:#36454F; padding:8px 12px; border-radius:20px; font-size: 0.9rem; }
+    .socials { text-align:center; margin-top:15px; display:flex; justify-content: center; align-items: center; gap: 20px; }
+    .socials a { margin:0 10px; display:inline-block; }
+    .socials a svg { width:32px; height:32px; fill:#777; transition:fill .3s; }
+    .socials a:hover svg { fill:var(--primary-color); }
+    footer { text-align:center; padding:20px; background:var(--bg-footer); color:#666; box-shadow:0 -5px 15px rgba(0,0,0,0.1); margin:40px auto 0; }
+    
+    /* AI Features Styling */
+    .ai-tool-container { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee; text-align: center; }
+    .input-group { display: flex; gap: 0.5rem; max-width: 600px; margin: 1rem auto; }
+    .input-group input { flex-grow: 1; padding: 10px; border: 2px solid #ccc; border-radius: 5px; }
+    .input-group input:focus { outline: none; border-color: var(--primary-color); }
+    .ai-button { background:var(--primary-color); color:var(--text-light); padding:10px 20px; border:none; border-radius:5px; cursor:pointer; transition: background-color .3s;}
+    .ai-button:hover { background: var(--primary-hover); }
+    .spinner { border: 4px solid rgba(0,0,0,0.1); width: 28px; height: 28px; border-radius: 50%; border-left-color: var(--primary-color); animation: spin 1s ease infinite; margin: 1rem auto; }
+    @keyframes spin { 0% {transform:rotate(0deg);} 100% {transform:rotate(360deg);} }
+    .ideas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; text-align: left; }
+    .idea-card { background:#f9f9f9; padding:15px; border-radius:8px; border: 1px solid #eee; }
+    .idea-card ul { list-style-position: inside; padding-left: 5px; }
+    .next-steps-btn { font-size: 0.8rem; padding: 4px 10px; border: 1px solid var(--primary-color); color: var(--primary-color); background: transparent; border-radius: 9999px; cursor: pointer; transition: all 0.2s; margin-top: 10px;}
+    .next-steps-btn:hover { background: var(--primary-color); color: white; }
+    #custom-bio-output { background: #fffbeb; padding: 1rem; border-radius: 8px; border: 1px solid #fde68a; margin-top: 1rem; }
+    #contact-form { text-align: left; max-width: 600px; margin: auto; }
+    #contact-form input, #contact-form textarea { width: 100%; padding: 10px; box-sizing: border-box; border: 2px solid #ccc; border-radius: 5px; margin-bottom: 1rem; }
+    #draft-message-btn { background: none; border: none; color: var(--primary-color); text-decoration: underline; cursor: pointer; font-size: 0.9rem; }
+    
+    /* Chat Widget */
+    #chat-widget-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+    #chat-toggle { background: var(--primary-color); color: var(--text-light); width: 60px; height: 60px; border: none; border-radius: 50%; font-size: 1.8rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform .2s; }
+    #chat-toggle:hover { transform: scale(1.1); }
+    #chatbox { display: none; position: absolute; bottom: 80px; right: 0; width: 320px; height: 450px; background: #fff; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.25); flex-direction: column; color: var(--text-dark); }
+    #chatbox-header { padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+    #close-chat { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #888; }
+    #chat-messages { flex-grow: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+    .chat-bubble { max-width: 80%; padding: 8px 12px; border-radius: 16px; word-wrap: break-word; line-height: 1.4; }
+    .chat-bubble-user { background-color: var(--primary-color); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .chat-bubble-ai { background-color: #f0f0f0; color: var(--text-dark); align-self: flex-start; border-bottom-left-radius: 4px; }
+    #chat-form-container { padding: 10px; border-top: 1px solid #eee; }
+    #chat-form-container form { display: flex; gap: 8px; }
+    #chat-form-container input { flex-grow: 1; border: 2px solid #ccc; border-radius: 20px; padding: 8px 12px; }
+    #chat-form-container button { background: var(--primary-color); border: none; color: white; padding: 8px 12px; border-radius: 20px; cursor: pointer; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Hamdy Gayar</h1>
-    <p>Graphic Designer | Front-End Developer | Creative Strategist</p>
-  </header>
 
-  <section>
-    <h2 style="color:#ffd700">Featured Projects</h2>
+<header class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.pixabay.com/video/2024/05/27/213158_large.mp4" type="video/mp4">
+    المتصفح لا يدعم عنصر الفيديو.
+  </video>
+  <div class="hero-content">
+    <img src="https://i.imgur.com/8sEaihC.jpeg" alt="Logo" class="logo">
+    <h1 id="name">Hamdino Soulitan</h1>
+    <p class="job" id="job">مصمم جرافيك | مطور واجهات أمامية وخلفية | استراتيجي إبداعي</p>
+    <p id="ai-welcome"></p>
+    <button class="lang-btn" id="lang-toggle-btn">🇸🇦 عربي | 🇬🇧 English</button>
+    <nav>
+      <a href="#about" id="nav-about">نبذة عني</a>
+      <a href="#idea-generator" id="nav-idea-generator">✨ مولد الأفكار</a>
+      <a href="#experience" id="nav-exp">الخبرة</a>
+      <a href="#skills" id="nav-skills">المهارات</a>
+      <a href="#courses" id="nav-courses">الشهادات</a>
+      <a href="#contact" id="nav-contact">تواصل معي</a>
+    </nav>
+  </div>
+</header>
 
-    <div class="project">
-      <h2>Al-Nile Gourmet Restaurant – Bilingual Menu</h2>
-      <p>Fully designed Arabic/English menu for a premium Egyptian restaurant based in Dubai.</p>
-      <p><a href="https://hamadino877.github.io/Al-Nile.Menu/" target="_blank">View Live Menu</a> | <a href="https://files.cdn-files-a.com/uploads/10921699/normal_68583e75c58c4.pdf" target="_blank">Download PDF</a></p>
+<main>
+    <section id="about">
+      <h2 id="about-title">نبذة عن حمدينو</h2>
+      <div class="card">
+        <p id="about-text">أنا مصمم تجربة أعتمد على التصميم والتكنولوجيا، أقدم حلول تجارية فعالة ومستهدفة. لأي مشروع يحتاج تصميم أو تطوير محترف… تواصل الآن لاستشارة مجانية.</p>
+      </div>
+      <div class="ai-tool-container">
+        <h3 id="bio-customizer-title">✨ تخصيص النبذة بالذكاء الاصطناعي</h3>
+        <p id="bio-customizer-desc" style="font-size: 0.9rem; color: #555; max-width: 500px; margin: 0.5rem auto 1rem;">هل أنت مسؤول توظيف؟ أدخل مجالك أدناه لتخصيص النبذة لترى كيف تناسب مهاراتي احتياجاتك.</p>
+        <div class="input-group">
+          <input type="text" id="bio-industry-input" placeholder="مثال: شركة تكنولوجيا مالية...">
+          <button id="customize-bio-btn" class="ai-button">تخصيص النبذة</button>
+        </div>
+        <div id="bio-loader" class="spinner" style="display: none;"></div>
+        <div id="custom-bio-output" style="display: none;"></div>
+      </div>
+    </section>
+
+    <section id="idea-generator">
+        <h2 id="idea-generator-title">✨ مولد أفكار المشاريع</h2>
+        <p id="idea-generator-desc" style="font-size: 0.9rem; color: #555; max-width: 500px; margin: 0 auto 1rem;">هل لديك فكرة عمل؟ أدخل مجالك أدناه ودع الذكاء الاصطناعي يقترح عليك مشاريع إبداعية.</p>
+        <div class="input-group">
+            <input type="text" id="industry-input" placeholder="مثال: مقهى، عقارات...">
+            <button id="generate-ideas-btn" class="ai-button">توليد الأفكار</button>
+        </div>
+        <div id="ideas-loader" class="spinner" style="display: none;"></div>
+        <div id="ideas-output" class="ideas-grid" style="margin-top: 2rem;"></div>
+    </section>
+    
+    <section id="experience">
+      <h2 id="exp-title">الخبرة العملية</h2>
+      <div class="card"><h3>Front-End & Back-End Developer</h3><p>API IT Company</p></div>
+      <div class="card"><h3>Creative Strategy Planner</h3><p>Binghatti Real Estate</p></div>
+      <div class="card"><h3>Supervisor</h3><p>Tyba Gourmet</p></div>
+      <div class="card"><h3>Call Center Representative</h3><p>Hadouta Masreya</p></div>
+    </section>
+    
+    <section id="skills" class="skills-section">
+      <h2 id="skills-title">المهارات</h2>
+      <ul>
+        <li>Graphic & UI/UX Design</li><li>HTML5 / CSS3</li><li>JavaScript</li><li>React/Vue</li>
+        <li>Responsive Design</li><li>Adobe PS/AI/ID</li><li>Brand Identity</li>
+        <li>Creative Strategy</li><li>Team Leadership</li><li>Project Management</li>
+      </ul>
+    </section>
+    
+    <section id="courses">
+      <h2 id="courses-title">الشهادات</h2>
+      <div class="card"><h3>Adobe Certified Associate – 2023</h3></div>
+      <div class="card"><h3>Front-End Bootcamp (edX) – 2024</h3></div>
+      <div class="card"><h3>Digital Marketing & Strategy – Google 2024</h3></div>
+      <div class="card"><h3>Customer Service Excellence – 2022</h3></div>
+    </section>
+    
+    <section id="contact">
+      <h2 id="contact-title">تواصل معي</h2>
+      <form id="contact-form">
+        <label for="contact-name" id="contact-name-label">الاسم</label>
+        <input type="text" id="contact-name" name="name" required>
+        <label for="contact-email" id="contact-email-label">البريد الإلكتروني</label>
+        <input type="email" id="contact-email" name="email" required>
+        <label for="contact-message" id="contact-message-label">رسالتك</label>
+        <textarea id="contact-message" name="message" rows="5" required></textarea>
+        <button type="button" id="draft-message-btn">✨ ساعدني في صياغة الرسالة</button>
+        <div style="text-align: center; margin-top: 1rem;">
+          <button type="submit" id="contact-submit-btn" class="ai-button">إرسال الرسالة</button>
+        </div>
+      </form>
+      <p id="contact-form-success" style="color: green; text-align: center; margin-top: 1rem; display: none;"></p>
+      <div class="socials" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+        <a href="https://github.com/hamadino877" target="_blank" title="GitHub"><svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+        <a href="https://www.instagram.com/hhaammddyy_elgayar" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919 4.919 1.266-.058 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.059 1.689.073 4.948.073s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg></a>
+        <a href="https://www.facebook.com/Bnelgayar/about" target="_blank" title="Facebook"><svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg></a>
+        <!-- WhatsApp Icon Added Here -->
+        <a href="https://wa.me/YOUR_NUMBER_HERE" target="_blank" title="WhatsApp">
+          <svg viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.4162 5.5841C16.421 3.58452 13.8213 2.50012 11.1218 2.50012C5.90196 2.50012 1.62207 6.77955 1.62207 12.0002C1.62207 13.9143 2.16431 15.7381 3.15617 17.2917L1.50049 22.5001L6.87854 20.8938C8.36195 21.7801 10.0521 22.2501 11.8217 22.2501H11.8717C17.0915 22.2501 21.3714 17.9707 21.3714 12.75C21.3714 10.046 20.2863 7.44632 18.4162 5.5841ZM11.8717 20.4287H11.8217C10.202 20.4287 8.62228 19.9763 7.28257 19.124L6.92273 18.9143L3.62305 19.8936L4.62286 16.6742L4.393 16.3045C3.44116 14.8509 2.92224 13.1869 2.92224 11.4502C2.92224 7.50112 6.95178 4.25024 11.1718 4.25024C13.2316 4.25024 15.1913 5.04944 16.6808 6.53893C18.1703 8.02842 18.9695 9.98816 18.9695 12.0502C18.9695 16.2703 15.7186 20.4287 11.8717 20.4287ZM16.4808 14.9248C16.2609 14.495 15.2014 13.9355 14.9115 13.7956C14.6216 13.6557 14.1918 13.6358 13.8919 13.7956C13.592 13.9555 12.7223 14.4851 11.7225 13.4854C10.4928 12.2557 9.87301 10.916 9.6931 10.6162C9.51319 10.3163 9.38328 10.1564 9.24337 9.96651C9.10345 9.77662 8.95355 9.62672 8.82364 9.4468C8.69372 9.26689 8.54383 9.10699 8.44387 8.96708C8.34392 8.82717 8.254 8.66726 8.254 8.46735C8.254 8.26744 8.34392 8.10753 8.44387 8.00758C8.54383 7.90763 8.68374 7.84767 8.85368 7.84767C9.02361 7.84767 9.16353 7.84767 9.28346 7.86765C9.4034 7.88764 9.53331 7.90763 9.68321 8.23746C9.83312 8.5673 10.1929 9.42691 10.2728 9.54684C10.3528 9.66677 10.4227 9.80668 10.3528 9.93659C10.2828 10.0665 10.2428 10.1265 10.1129 10.2664C9.98302 10.4063 9.84311 10.5162 9.74316 10.6062C9.6432 10.6961 9.56325 10.766 9.44333 10.896C9.3234 11.0259 9.20348 11.1458 9.3234 11.2957C9.44333 11.4456 9.92298 12.2353 10.6926 12.965C11.6422 13.8646 12.4419 14.2144 12.7218 14.3343C12.8617 14.3942 13.0716 14.3743 13.2215 14.2144C13.3714 14.0545 13.6213 13.7647 13.7712 13.5648C13.9211 13.3649 14.071 13.325 14.2709 13.325C14.4708 13.325 15.1704 13.6548 15.3803 13.7747C15.5902 13.8947 15.7701 13.9546 15.84 14.0545C15.9099 14.1545 15.9099 14.2844 15.86 14.3743C15.81 14.4642 15.7101 14.5342 15.6101 14.6341C15.5102 14.734 15.4102 14.834 15.3103 14.9339C15.2103 15.0338 16.6808 14.0053 16.4808 14.9248Z" ></path></svg>
+        </a>
+      </div>
+      <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;" id="contact-footer">🎁 لأي استشارة تصميم/تطوير تجارية – تواصل واستلم استشارة مجانية الآن.</p>
+    </section>
+</main>
+<footer>&copy; <span id="year"></span> Hamdino Soulitan | جميع الحقوق محفوظة</footer>
+
+<div id="chat-widget-container">
+    <div id="chatbox">
+        <div id="chatbox-header"><span id="chatbox-title-text">مستشار AI</span><button id="close-chat">&times;</button></div>
+        <div id="chat-messages">
+            <div class="chat-bubble chat-bubble-ai"><strong id="chat-welcome-name">مستشار AI:</strong> <span id="chat-welcome-text">مرحبًا! كيف يمكنني مساعدتك؟</span></div>
+        </div>
+        <div id="chat-form-container">
+            <form id="chat-form">
+                <input type="text" id="chat-input" placeholder="اكتب رسالتك..." autocomplete="off">
+                <button type="submit" id="chat-submit-btn">إرسال</button>
+            </form>
+        </div>
     </div>
+    <button id="chat-toggle">🤖</button>
+</div>
 
-    <div class="project">
-      <h2>HM Solutions – Logo & Brand Identity</h2>
-      <p>Luxury logo and branding concept blending modern typography and golden gradients for a tech startup.</p>
-      <p><a href="#">View Logo (Upload to GitHub repo or Behance)</a></p>
-    </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    let isArabic = true;
+    let chatHistory = [];
+    const originalBio = document.getElementById('about-text').textContent;
 
-    <div class="project">
-      <h2>Visual FX Poster Concept</h2>
-      <p>Cinematic photo manipulation concept using advanced editing techniques and AI-enhanced detail.</p>
-      <p><a href="#">View Design (Upload to GitHub or Behance)</a></p>
-    </div>
+    // --- DOM Elements ---
+    const elements = {
+        html: document.documentElement,
+        name: document.getElementById('name'),
+        job: document.getElementById('job'),
+        navAbout: document.getElementById('nav-about'),
+        navIdeaGenerator: document.getElementById('nav-idea-generator'),
+        navExp: document.getElementById('nav-exp'),
+        navSkills: document.getElementById('nav-skills'),
+        navCourses: document.getElementById('nav-courses'),
+        navContact: document.getElementById('nav-contact'),
+        aboutTitle: document.getElementById('about-title'),
+        aboutText: document.getElementById('about-text'),
+        bioCustomizerTitle: document.getElementById('bio-customizer-title'),
+        bioCustomizerDesc: document.getElementById('bio-customizer-desc'),
+        bioIndustryInput: document.getElementById('bio-industry-input'),
+        customizeBioBtn: document.getElementById('customize-bio-btn'),
+        ideaGeneratorTitle: document.getElementById('idea-generator-title'),
+        ideaGeneratorDesc: document.getElementById('idea-generator-desc'),
+        industryInput: document.getElementById('industry-input'),
+        generateIdeasBtn: document.getElementById('generate-ideas-btn'),
+        expTitle: document.getElementById('exp-title'),
+        skillsTitle: document.getElementById('skills-title'),
+        coursesTitle: document.getElementById('courses-title'),
+        contactTitle: document.getElementById('contact-title'),
+        contactNameLabel: document.getElementById('contact-name-label'),
+        contactEmailLabel: document.getElementById('contact-email-label'),
+        contactMessageLabel: document.getElementById('contact-message-label'),
+        draftMessageBtn: document.getElementById('draft-message-btn'),
+        contactSubmitBtn: document.getElementById('contact-submit-btn'),
+        contactFooter: document.getElementById('contact-footer'),
+        chatboxTitleText: document.getElementById('chatbox-title-text'),
+        chatWelcomeName: document.getElementById('chat-welcome-name'),
+        chatWelcomeText: document.getElementById('chat-welcome-text'),
+        chatInput: document.getElementById('chat-input'),
+        chatSubmitBtn: document.getElementById('chat-submit-btn'),
+        ideasOutput: document.getElementById('ideas-output'),
+        langToggleBtn: document.getElementById('lang-toggle-btn'),
+    };
 
-  </section>
+    // --- Translations ---
+    const translations = {
+        ar: {
+            name: "Hamdino Soulitan",
+            job: "مصمم جرافيك | مطور واجهات أمامية وخلفية | استراتيجي إبداعي",
+            navAbout: "نبذة عني", navIdeaGenerator: "✨ مولد الأفكار", navExp: "الخبرة", navSkills: "المهارات", navCourses: "الشهادات", navContact: "تواصل معي",
+            aboutTitle: "نبذة عن حمدينو", aboutText: "أنا مصمم تجربة أعتمد على التصميم والتكنولوجيا، أقدم حلول تجارية فعالة ومستهدفة. لأي مشروع يحتاج تصميم أو تطوير محترف… تواصل الآن لاستشارة مجانية.",
+            bioCustomizerTitle: "✨ تخصيص النبذة بالذكاء الاصطناعي", bioCustomizerDesc: "هل أنت مسؤول توظيف؟ أدخل مجالك أدناه لتخصيص النبذة لترى كيف تناسب مهاراتي احتياجاتك.", bioIndustryInput: "مثال: شركة تكنولوجيا مالية...", customizeBioBtn: "تخصيص النبذة",
+            ideaGeneratorTitle: "✨ مولد أفكار المشاريع", ideaGeneratorDesc: "هل لديك فكرة عمل؟ أدخل مجالك أدناه ودع الذكاء الاصطناعي يقترح عليك مشاريع إبداعية.", industryInput: "مثال: مقهى، عقارات...", generateIdeasBtn: "توليد الأفكار",
+            keyFeatures: "الميزات الرئيسية:", suggestNextSteps: "اقترح الخطوات التالية",
+            expTitle: "الخبرة العملية", skillsTitle: "المهارات", coursesTitle: "الشهادات",
+            contactTitle: "تواصل معي", contactNameLabel: "الاسم", contactEmailLabel: "البريد الإلكتروني", contactMessageLabel: "رسالتك", draftMessageBtn: "✨ ساعدني في صياغة الرسالة", contactSubmitBtn: "إرسال الرسالة",
+            contactFooter: "🎁 لأي استشارة تصميم/تطوير تجارية – تواصل واستلم استشارة مجانية الآن.", formSuccess: "شكرًا لك! تم إرسال رسالتك بنجاح.",
+            chatboxTitleText: "مستشار AI", chatWelcomeName: "مستشار AI:", chatWelcomeText: "مرحبًا! كيف يمكنني مساعدتك؟", chatInput: "اكتب رسالتك...", chatSubmitBtn: "إرسال",
+            errorGeneric: "عذرًا، حدث خطأ ما.", errorParse: "عذرًا، حدث خطأ في تنسيق الاستجابة.", errorNoIdeas: "لم يتم إنشاء أي أفكار. جرب مصطلحًا مختلفًا.",
+        },
+        en: {
+            name: "Hamdino Soulitan",
+            job: "Graphic Designer | Front-End & Back-End Developer | Creative Strategist",
+            navAbout: "About", navIdeaGenerator: "✨ Idea Generator", navExp: "Experience", navSkills: "Skills", navCourses: "Certificates", navContact: "Contact",
+            aboutTitle: "About Hamdino", aboutText: "I am an experience designer who relies on design and technology to deliver effective and targeted business solutions. For any project needing professional design or development... contact me now for a free consultation.",
+            bioCustomizerTitle: "✨ AI-Powered Bio Customizer", bioCustomizerDesc: "Are you a recruiter? Enter your field below to customize my bio and see how my skills fit your needs.", bioIndustryInput: "e.g., Fintech company...", customizeBioBtn: "Customize Bio",
+            ideaGeneratorTitle: "✨ AI Project Idea Generator", ideaGeneratorDesc: "Have a business idea? Enter your field below and let the AI suggest creative projects.", industryInput: "e.g., coffee shop, real estate...", generateIdeasBtn: "Generate Ideas",
+            keyFeatures: "Key Features:", suggestNextSteps: "Suggest Next Steps",
+            expTitle: "Work Experience", skillsTitle: "Skills", coursesTitle: "Certificates",
+            contactTitle: "Contact Me", contactNameLabel: "Name", contactEmailLabel: "Email", contactMessageLabel: "Your Message", draftMessageBtn: "✨ Help Me Draft", contactSubmitBtn: "Send Message",
+            contactFooter: "🎁 For any commercial design/development consultation – contact now for a free consultation.", formSuccess: "Thank you! Your message has been sent successfully.",
+            chatboxTitleText: "AI Advisor", chatWelcomeName: "AI Advisor:", chatWelcomeText: "Hello! How can I help you?", chatInput: "Type your message...", chatSubmitBtn: "Send",
+            errorGeneric: "Sorry, an error occurred.", errorParse: "Sorry, there was an error with the response format.", errorNoIdeas: "No ideas generated. Try a different term.",
+        }
+    };
+    
+    // --- Functions ---
+    function updateText() {
+        const lang = isArabic ? 'ar' : 'en';
+        for (const key in elements) {
+            if (elements[key] && translations[lang][key]) {
+                if (elements[key].placeholder !== undefined) {
+                    elements[key].placeholder = translations[lang][key];
+                } else {
+                    elements[key].textContent = translations[lang][key];
+                }
+            }
+        }
+        elements.html.lang = isArabic ? 'ar' : 'en';
+        elements.html.dir = isArabic ? 'rtl' : 'ltr';
+        // Re-render idea cards to update button text
+        const currentIdeas = Array.from(elements.ideasOutput.children).map(card => ({
+            name: card.dataset.name,
+            description: card.dataset.description,
+            features: Array.from(card.querySelectorAll('ul li')).map(li => li.textContent)
+        }));
+        if(currentIdeas.length > 0) displayIdeas(currentIdeas);
+    }
 
-  <footer>
-    &copy; 2025 Hamdy Gayar | Connect: hamadino877@gmail.com
-  </footer>
+    const apiKey = ""; // This is intentionally left empty.
+    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    
+    async function callGemini(prompt, jsonConfig = null) {
+      const payload = { 
+          contents: [{ role: "user", parts: [{ text: prompt }] }],
+          safetySettings: [
+              { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+              { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+              { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+              { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
+          ]
+      };
+      if (jsonConfig) {
+          payload.generationConfig = { 
+            responseMimeType: "application/json", 
+            responseSchema: jsonConfig 
+          };
+      }
+      try {
+        const response = await fetch(GEMINI_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        if (!response.ok) throw new Error(`API call failed: ${response.status}`);
+        const result = await response.json();
+        if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+            return result.candidates[0].content.parts[0].text;
+        } else {
+            console.error("Invalid response structure from API:", result);
+            return null;
+        }
+      } catch(error) { 
+          console.error("Error calling Gemini API:", error); 
+          return null; 
+      }
+    }
+
+    function displayIdeas(ideas) {
+        const lang = isArabic ? 'ar' : 'en';
+        elements.ideasOutput.innerHTML = '';
+        if (!ideas || ideas.length === 0) {
+            elements.ideasOutput.innerHTML = `<p>${translations[lang].errorNoIdeas}</p>`;
+            return;
+        }
+        ideas.forEach(idea => {
+            const card = document.createElement('div');
+            card.className = 'idea-card';
+            card.dataset.name = idea.name;
+            card.dataset.description = idea.description;
+            const featuresHtml = idea.features.map(f => `<li>${f}</li>`).join('');
+            card.innerHTML = `
+                <h3>${idea.name}</h3>
+                <p style="font-size: 0.9rem; color: #555; margin: 0.5rem 0;">${idea.description}</p>
+                <h4 style="font-weight: bold; font-size: 0.9rem; margin-top: 1rem;">${translations[lang].keyFeatures}</h4>
+                <ul style="font-size: 0.9rem; color: #555;">${featuresHtml}</ul>
+                <div class="next-steps-container" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                  <button class="next-steps-btn">${translations[lang].suggestNextSteps}</button>
+                  <div class="next-steps-output" style="margin-top: 0.5rem;"></div>
+                </div>`;
+            elements.ideasOutput.appendChild(card);
+        });
+    }
+
+    function addMessageToChat(text, sender) {
+      const chatMessages = document.getElementById('chat-messages');
+      const msgEl = document.createElement('div');
+      const lang = isArabic ? 'ar' : 'en';
+      if (sender === 'ai-typing') {
+        msgEl.innerHTML = `<strong>${translations[lang].chatWelcomeName}</strong> ${translations[lang].typing || 'is typing...'}`;
+        msgEl.className = 'chat-bubble chat-bubble-ai';
+      } else {
+        msgEl.className = `chat-bubble ${sender === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai'}`;
+        msgEl.textContent = text;
+      }
+      chatMessages.appendChild(msgEl);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return msgEl;
+    }
+
+    // --- Event Listeners ---
+    elements.langToggleBtn.onclick = () => {
+        isArabic = !isArabic;
+        updateText();
+    };
+
+    elements.customizeBioBtn.onclick = async () => {
+        const industry = elements.bioIndustryInput.value.trim();
+        if (!industry) return;
+        const loader = document.getElementById('bio-loader');
+        const outputDiv = document.getElementById('custom-bio-output');
+        loader.style.display = 'block';
+        outputDiv.style.display = 'none';
+        elements.customizeBioBtn.disabled = true;
+        const lang = isArabic ? 'ar' : 'en';
+        const prompt = `You are an expert career coach rewriting a professional bio for Hamdino, a skilled Graphic Designer and Full Stack Developer. His original bio is: "${originalBio}". A visitor from the '${industry}' field is viewing his portfolio. Rewrite the bio in 3-4 concise sentences, highlighting skills (like UI/UX, Creative Strategy, React) most relevant to the '${industry}' sector. Adopt a confident, professional tone. Respond ONLY with the rewritten paragraph in ${lang}.`;
+        const newBio = await callGemini(prompt);
+        loader.style.display = 'none';
+        elements.customizeBioBtn.disabled = false;
+        outputDiv.textContent = newBio || translations[lang].errorGeneric;
+        outputDiv.style.display = 'block';
+    };
+
+    elements.generateIdeasBtn.onclick = async () => {
+        const industry = elements.industryInput.value.trim();
+        if (!industry) return;
+        const loader = document.getElementById('ideas-loader');
+        elements.ideasOutput.innerHTML = '';
+        loader.style.display = 'block';
+        elements.generateIdeasBtn.disabled = true;
+        const lang = isArabic ? 'ar' : 'en';
+        const prompt = `You are a creative strategist. A client in the '${industry}' industry is visiting Hamdino's portfolio. Generate 3 distinct project ideas Hamdino could build. For each, provide a name, a description, and 2-3 key features. Respond in ${lang}.`;
+        const schema = { type: "ARRAY", items: { type: "OBJECT", properties: { name: { type: "STRING" }, description: { type: "STRING" }, features: { type: "ARRAY", items: { type: "STRING" } } }, required: ["name", "description", "features"] }};
+        const ideasJson = await callGemini(prompt, schema);
+        try {
+            const ideas = JSON.parse(ideasJson);
+            displayIdeas(ideas);
+        } catch (e) {
+            elements.ideasOutput.innerHTML = `<p>${translations[lang].errorParse}</p>`;
+        }
+        loader.style.display = 'none';
+        elements.generateIdeasBtn.disabled = false;
+    };
+
+    elements.ideasOutput.addEventListener('click', async (e) => {
+        if (!e.target.classList.contains('next-steps-btn')) return;
+        const button = e.target;
+        const card = button.closest('.idea-card');
+        const outputDiv = card.querySelector('.next-steps-output');
+        const spinner = document.createElement('div');
+        spinner.className = 'spinner';
+        outputDiv.innerHTML = '';
+        outputDiv.appendChild(spinner);
+        button.style.display = 'none';
+        const lang = isArabic ? 'ar' : 'en';
+        const prompt = `You are a project manager. For a project called '${card.dataset.name}' described as '${card.dataset.description}', outline 3-4 high-level project phases or 'next steps'. Respond with a simple, un-numbered list. Keep it brief. Respond ONLY with the list in ${lang}.`;
+        const steps = await callGemini(prompt);
+        outputDiv.innerHTML = '';
+        if (steps) {
+            const list = document.createElement('ul');
+            list.style.listStyleType = 'disc';
+            list.style.paddingLeft = '20px';
+            steps.split('\n').filter(s => s.trim() !== '').forEach(stepText => {
+                const li = document.createElement('li');
+                li.textContent = stepText.replace(/^- /, '');
+                list.appendChild(li);
+            });
+            outputDiv.appendChild(list);
+        } else {
+            outputDiv.textContent = translations[lang].errorGeneric;
+            button.style.display = 'inline-block';
+        }
+    });
+
+    elements.draftMessageBtn.onclick = async () => {
+        const messageTextarea = document.getElementById('contact-message');
+        const initialText = messageTextarea.value.trim();
+        if (!initialText) return;
+        const lang = isArabic ? 'ar' : 'en';
+        const prompt = `You are a professional business communication assistant. A potential client wants to contact developer Hamdino. Their initial thought is: '${initialText}'. Polish this into a clear, professional 2-3 sentence inquiry. Respond ONLY with the polished message in ${lang}.`;
+        const newText = await callGemini(prompt);
+        if (newText) messageTextarea.value = newText;
+    };
+
+    document.getElementById('contact-form').onsubmit = (e) => {
+        e.preventDefault();
+        const successMsg = document.getElementById('contact-form-success');
+        const lang = isArabic ? 'ar' : 'en';
+        successMsg.textContent = translations[lang].formSuccess;
+        successMsg.style.display = 'block';
+        e.target.reset();
+        setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+    };
+
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatbox = document.getElementById('chatbox');
+    const closeChat = document.getElementById('close-chat');
+    chatToggle.onclick = () => { chatbox.style.display = chatbox.style.display === 'flex' ? 'none' : 'flex'; };
+    closeChat.onclick = () => { chatbox.style.display = 'none'; };
+
+    document.getElementById('chat-form').onsubmit = async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const userInput = input.value.trim();
+      if (!userInput) return;
+      addMessageToChat(userInput, 'user');
+      input.value = '';
+      const typingIndicator = addMessageToChat('...', 'ai-typing');
+      const lang = isArabic ? 'ar' : 'en';
+      const prompt = `You are Hamdino's AI assistant. Answer questions about his skills. Be friendly, professional, and concise. Maintain conversation in ${lang}.\nHistory: ${JSON.stringify(chatHistory)}\nUser: ${userInput}`;
+      const aiResponse = await callGemini(prompt) || translations[lang].errorGeneric;
+      typingIndicator.remove();
+      addMessageToChat(aiResponse, 'ai');
+      chatHistory.push({ user: userInput, model: aiResponse });
+      if(chatHistory.length > 6) chatHistory.shift();
+    };
+
+    // --- Initial Load ---
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (async function generateWelcomeMessage() {
+        const lang = isArabic ? 'ar' : 'en';
+        const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Dubai' });
+        const prompt = `Generate a very short, inspiring, one-line welcome message (under 12 words) for a tech & design portfolio. The visitor is in Dubai, and the time is ${time}. Respond ONLY with the message itself in ${lang}.`;
+        const message = await callGemini(prompt);
+        if (message) document.getElementById('ai-welcome').textContent = message;
+    })();
+    updateText(); // Set initial language
+});
+</script>
+
 </body>
 </html>
